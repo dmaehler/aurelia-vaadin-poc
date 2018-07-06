@@ -1,0 +1,60 @@
+<template>
+  <div class="card">
+    <div class="card-header text-white bg-primary">
+      <h3>Perfil</h3>
+    </div>
+    <div class="card-body">
+      <form role="form">
+        <div class="form-group" validation-errors.bind="firstNameErrors"
+            class.bind="firstNameErrors.length ? 'has-error' : ''">
+          <label class="col-sm-3 col-form-label">Nome</label>
+          <div class="col-sm-9">
+            <input type="text" placeholder="Nome" class="form-control"
+                  class.bind="firstNameErrors.length ? 'is-invalid' : ''"
+                  value.bind="contact.firstName & validate">
+            <span class="invalid-feedback" repeat.for="error of firstNameErrors">
+              ${error.error.message}
+            </span>
+          </div>
+        </div>
+        <div class="form-group" validation-errors.bind="lastNameErrors"
+            class.bind="lastNameErrors.length ? 'has-error' : ''">
+          <label class="col-sm-3 col-form-label">Sobrenome</label>
+          <div class="col-sm-9">
+            <input type="text" placeholder="Sobrenome" class="form-control" 
+                  class.bind="lastNameErrors.length ? 'is-invalid' : ''"
+                  value.bind="contact.lastName & validate">
+            <span class="invalid-feedback" repeat.for="error of lastNameErrors">
+              ${error.error.message}
+            </span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 col-form-label">Email</label>
+          <div class="col-sm-9">
+            <input type="email" placeholder="Email" class="form-control" value.bind="contact.email">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 col-form-label">Celular</label>
+          <div class="col-sm-9">
+            <input type="text" placeholder="Celular" class="form-control" value.bind="contact.phone">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 col-form-label">Data de nascimento</label>
+          <div class="col-sm-9">
+            <vaadin-date-picker label="Data de nascimento" value.two-way="contact.dtNascimento"></vaadin-date-picker>
+          </div>
+        </div>
+      </form>
+      <div>
+        <vaadin-button class="float-right" 
+                    click.delegate="save()" 
+                    disabled.bind="api.isRequesting || !canSave">
+          Salvar
+        </vaadin-button>
+      </div>
+    </div>
+  </div>
+</template>
